@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"3cVYd":[function(require,module,exports) {
+})({"gjUm6":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "48f35ac772e0b156";
+module.bundle.HMR_BUNDLE_ID = "022c1b16b4b6dfad";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -2944,32 +2944,24 @@ process.umask = function() {
     return 0;
 };
 
-},{}],"iHrAj":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$a4c4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"d8Dch":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$98a3 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$a4c4.prelude(module);
+$parcel$ReactRefreshHelpers$98a3.prelude(module);
 
 try {
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
+var _mainViewJsx = require("./components/mainView/mainView.jsx");
 // Import statement to indicate that you need to bundle `./index.scss`
-var _indexScss = require("../scss/index.scss");
+var _indexScss = require("./index.scss");
 // Main component (will eventually use all the others)
 const MyFlixApplication = ()=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "my-flix",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            children: "Good morning"
-        }, void 0, false, {
-            fileName: "src/jsx/index.jsx",
-            lineNumber: 10,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/jsx/index.jsx",
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainViewJsx.MainView), {}, void 0, false, {
+        fileName: "src/index.jsx",
         lineNumber: 9,
-        columnNumber: 5
+        columnNumber: 10
     }, undefined);
 };
 _c = MyFlixApplication;
@@ -2978,19 +2970,19 @@ const container = document.querySelector("#root");
 const root = (0, _client.createRoot)(container);
 // Tells React to render your app in the root DOM element
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(MyFlixApplication, {}, void 0, false, {
-    fileName: "src/jsx/index.jsx",
-    lineNumber: 20,
+    fileName: "src/index.jsx",
+    lineNumber: 17,
     columnNumber: 13
 }, undefined));
 var _c;
 $RefreshReg$(_c, "MyFlixApplication");
 
-  $parcel$ReactRefreshHelpers$a4c4.postlude(module);
+  $parcel$ReactRefreshHelpers$98a3.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../scss/index.scss":"kVb0b"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./components/mainView/mainView.jsx":"81dIE","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./index.scss":"lJZlQ"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -27177,6 +27169,108 @@ module.exports = require("ef03b89c8fe2794e");
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
+},{}],"81dIE":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$606d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$606d.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _movieCard = require("../movieCard/movieCard");
+var _movieView = require("../movieView/movieView");
+var _moviesJson = require("../../resources/movies.json");
+var _moviesJsonDefault = parcelHelpers.interopDefault(_moviesJson);
+var _s = $RefreshSig$();
+const MainView = ()=>{
+    _s();
+    const [movies, setMovie] = (0, _react.useState)((0, _moviesJsonDefault.default));
+    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+        movie: selectedMovie,
+        onBackClick: ()=>setSelectedMovie(null)
+    }, void 0, false, {
+        fileName: "src/components/mainView/mainView.jsx",
+        lineNumber: 11,
+        columnNumber: 16
+    }, undefined);
+    if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "The list is empty!"
+    }, void 0, false, {
+        fileName: "src/components/mainView/mainView.jsx",
+        lineNumber: 15,
+        columnNumber: 16
+    }, undefined);
+    let nthMovie = 0;
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        style: {
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr"
+        },
+        children: movies.map((movie)=>{
+            nthMovie++;
+            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                nthMovie: nthMovie,
+                movie: movie,
+                onMovieClick: ()=>{
+                    setSelectedMovie(movie);
+                }
+            }, movie._id, false, {
+                fileName: "src/components/mainView/mainView.jsx",
+                lineNumber: 24,
+                columnNumber: 28
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/mainView/mainView.jsx",
+        lineNumber: 20,
+        columnNumber: 9
+    }, undefined);
+};
+_s(MainView, "GJPleCDeXrUp3ig/uZCModXdgcM=");
+_c = MainView;
+var _c;
+$RefreshReg$(_c, "MainView");
+
+  $parcel$ReactRefreshHelpers$606d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","../movieCard/movieCard":"gGoIK","../movieView/movieView":"2pbYt","../../resources/movies.json":"fZG53"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
 },{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
@@ -27315,6 +27409,161 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"7422ead32dcc1e6b":"786KC"}],"kVb0b":[function() {},{}]},["3cVYd","1xC6H","iHrAj"], "iHrAj", "parcelRequire6ce0")
+},{"7422ead32dcc1e6b":"786KC"}],"gGoIK":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$1b04 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$1b04.prelude(module);
 
-//# sourceMappingURL=index.72e0b156.js.map
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _movieCardScss = require("./movieCard.scss");
+const MovieCard = (props)=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "movieCard",
+        onClick: ()=>{
+            props.onMovieClick();
+        },
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: props.movie.imagePath
+                }, void 0, false, {
+                    fileName: "src/components/movieCard/movieCard.jsx",
+                    lineNumber: 7,
+                    columnNumber: 14
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/movieCard/movieCard.jsx",
+                lineNumber: 7,
+                columnNumber: 9
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    props.nthMovie,
+                    ": ",
+                    props.movie.title
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movieCard/movieCard.jsx",
+                lineNumber: 8,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/movieCard/movieCard.jsx",
+        lineNumber: 4,
+        columnNumber: 12
+    }, undefined);
+};
+_c = MovieCard;
+var _c;
+$RefreshReg$(_c, "MovieCard");
+
+  $parcel$ReactRefreshHelpers$1b04.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./movieCard.scss":"4whX7"}],"4whX7":[function() {},{}],"2pbYt":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4504 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4504.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovieView", ()=>MovieView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _movieViewScss = require("./movieView.scss");
+const MovieView = ({ movie, onBackClick })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "movieView",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: movie.imagePath
+                }, void 0, false, {
+                    fileName: "src/components/movieView/movieView.jsx",
+                    lineNumber: 7,
+                    columnNumber: 17
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/movieView/movieView.jsx",
+                lineNumber: 6,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    "Title: ",
+                    movie.title
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movieView/movieView.jsx",
+                lineNumber: 9,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    "Director: ",
+                    movie.director.name
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movieView/movieView.jsx",
+                lineNumber: 10,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    "Genre: ",
+                    movie.genre.type
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movieView/movieView.jsx",
+                lineNumber: 11,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    "Description: ",
+                    movie.description
+                ]
+            }, void 0, true, {
+                fileName: "src/components/movieView/movieView.jsx",
+                lineNumber: 12,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>onBackClick(),
+                children: "Back"
+            }, void 0, false, {
+                fileName: "src/components/movieView/movieView.jsx",
+                lineNumber: 14,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/movieView/movieView.jsx",
+        lineNumber: 5,
+        columnNumber: 9
+    }, undefined);
+};
+_c = MovieView;
+var _c;
+$RefreshReg$(_c, "MovieView");
+
+  $parcel$ReactRefreshHelpers$4504.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./movieView.scss":"73oGt"}],"73oGt":[function() {},{}],"fZG53":[function(require,module,exports) {
+module.exports = JSON.parse('[{"genre":{"type":"sci-fiction","description":"Science fiction (sometimes shortened to SF or sci-fi) is a genre of speculative fiction, which typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life. It is related to fantasy, horror, and superhero fiction and contains many subgenres. Its exact definition has long been disputed among authors, critics, scholars, and readers."},"director":{"name":"James Cameron","bio":"James Francis Cameron CC (born August 16, 1954) is a Canadian filmmaker. He is a major figure in the post-New Hollywood era, and one of the industry\'\'s most innovative filmmakers. He often uses novel technologies with a classical filmmaking style. He first gained recognition for writing and directing The Terminator (1984) and found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), True Lies (1994), as well as Avatar (2009) and its sequels. He directed, wrote, co-produced, and co-edited Titanic (1997), winning three Academy Awards for Best Picture, Best Director, and Best Film Editing. He is a recipient of various other industry accolades, and three of his films have been selected for preservation in the National Film Registry by the Library of Congress.","birthday":"1954-08-16T04:00:00.000Z","deathDate":null},"_id":"65ea7fed5c86da95258fee26","title":"Avatar: The Way of Water","description":"Avatar: The Way of Water is a 2022 American epic science fiction film co-produced and directed by James Cameron, who co-wrote the screenplay with Rick Jaffa and Amanda Silver from a story the trio wrote with Josh Friedman and Shane Salerno. Distributed by 20th Century Studios, it is the sequel to Avatar (2009) and the second installment in the Avatar film series. It features Sam Worthington, Zoe Salda\xf1a and Stephen Lang reprising their roles from the first film, with Sigourney Weaver returning in an new role and Kate Winslet joining the cast. It follows a blue-skinned humanoid Na\'vi named Jake Sully (Worthington) as he and his family, under renewed human threat, seek refuge with the aquatic Metkayina clan of Pandora, a habitable exomoon on which they live.","imagePath":"https://upload.wikimedia.org/wikipedia/en/5/54/Avatar_The_Way_of_Water_poster.jpg","featured":false,"actors":[]},{"genre":{"type":"comedy","description":"Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."},"director":{"name":"Stephen Chow","bio":"Stephen Chow Sing-chi (Chinese: \u5468\u661F\u99B3; Jyutping: zau1 sing1 ci4; Cantonese Yale: J\u0101u S\u012Bngch\xech, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.","birthday":"1962-06-22T04:00:00.000Z","deathDate":null},"_id":"65ea7fc95c86da95258fee22","title":"Shaolin Soccer","description":"Shaolin Soccer (Chinese: \u5C11\u6797\u8DB3\u7403) is a 2001 Hong Kong sports comedy film directed by Stephen Chow, who also stars in the lead role. The film revolves around a former Shaolin monk who reunites his five brothers,[note 1] years after their master\'s death, to apply their superhuman martial arts skills to play soccer and bring Shaolin kung fu to the masses.","imagePath":"https://upload.wikimedia.org/wikipedia/en/3/3e/ShaolinSoccerFilmPoster.jpg","featured":false,"actors":[]},{"genre":{"type":"comedy","description":"Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."},"director":{"name":"Stephen Chow","bio":"Stephen Chow Sing-chi (Chinese: \u5468\u661F\u99B3; Jyutping: zau1 sing1 ci4; Cantonese Yale: J\u0101u S\u012Bngch\xech, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.","birthday":"1962-06-22T04:00:00.000Z","deathDate":null},"_id":"65ea80065c86da95258fee29","title":"The God of Cookery","description":"The God of Cookery (Chinese: \u98DF\u795E) is a 1996 Hong Kong comedy film which was co-directed by Stephen Chow and Lee Lik-chi. The film features an ensemble cast include Stephen Chow, Karen Mok, Vincent Kok and Richard Ng.","imagePath":"https://upload.wikimedia.org/wikipedia/en/9/9c/GodOfCookery.jpg","featured":false,"actors":[]},{"genre":{"type":"horror","description":"Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs."},"director":{"name":"Hideo Nakata","bio":"Hideo Nakata (\u4E2D\u7530 \u79C0\u592B, Nakata Hideo, born July 19, 1961) is a Japanese filmmaker.","birthday":"1961-07-19T04:00:00.000Z","deathDate":null},"_id":"65ea7ffe5c86da95258fee28","title":"The Ring Two","description":"The Ring Two is a 2005 American psychological supernatural horror film and sequel to the 2002 film The Ring, which was a remake of the 1998 Japanese film Ring. Hideo Nakata, director of the original Ring, directed this film in place of Gore Verbinski. Noam Murro was attached before Nakata, but left due to creative differences. Naomi Watts, David Dorfman and Daveigh Chase reprised their roles with Simon Baker, Elizabeth Perkins and Sissy Spacek joining the cast.","imagePath":"https://upload.wikimedia.org/wikipedia/en/1/15/Ring_two_ver2.jpg","featured":false,"actors":[]},{"genre":{"type":"comedy","description":"Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."},"director":{"name":"Stephen Chow","bio":"Stephen Chow Sing-chi (Chinese: \u5468\u661F\u99B3; Jyutping: zau1 sing1 ci4; Cantonese Yale: J\u0101u S\u012Bngch\xech, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.","birthday":"1962-06-22T04:00:00.000Z","deathDate":null},"_id":"65ea800e5c86da95258fee2a","title":"King of Comedy","description":"King of Comedy (Chinese: \u559C\u5287\u4E4B\u738B) is a 1999 Hong Kong comedy film directed by Lee Lik-chi and Stephen Chow. The New King of Comedy, a remake set in mainland China, was released in 2019.","imagePath":"https://upload.wikimedia.org/wikipedia/en/4/4c/Chows_KING_OF_COMEDY.jpg","featured":false,"actors":[]},{"genre":{"type":"horror","description":"Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs."},"director":{"name":"Jaume Collet-Serra","bio":"Jaume Collet-Serra (Catalan: [\u02C8\u0292awm\u0259 ku\u02C8\u028E\u025Bt \u02C8s\u025Br\u0259]; born 23 March 1974) is a Spanish-American film director and producer. He directed the horror films House of Wax (2005), Orphan (2009), and The Shallows (2016), as well as the Liam Neeson-led thriller films Unknown (2011), Non-Stop (2014), Run All Night (2015), and The Commuter (2018). Collet-Serra also directed the Dwayne Johnson-led films, Jungle Cruise (2021), based on the eponymous theme park attraction from Disney, and Black Adam (2022), based on the comic book character of the same name from DC.","birthday":"1974-03-23T04:00:00.000Z","deathDate":null},"_id":"65ea7fdd5c86da95258fee24","title":"Orphan","description":"Orphan is a 2009 psychological horror film directed by Jaume Collet-Serra and written by David Leslie Johnson from a story by Alex Mace. The film stars Vera Farmiga, Peter Sarsgaard, Isabelle Fuhrman, CCH Pounder, Jimmy Bennett and Aryana Engineer. The plot centers on a couple who, after the death of their unborn child, adopt a psychopathic nine-year-old girl with a mysterious past.","imagePath":"https://upload.wikimedia.org/wikipedia/en/4/47/Orphanposter.jpg","featured":false,"actors":[]},{"genre":{"type":"comedy","description":"Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."},"director":{"name":"Stephen Chow","bio":"Stephen Chow Sing-chi (Chinese: \u5468\u661F\u99B3; Jyutping: zau1 sing1 ci4; Cantonese Yale: J\u0101u S\u012Bngch\xech, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.","birthday":"1962-06-22T04:00:00.000Z","deathDate":null},"_id":"65ea7fd25c86da95258fee23","title":"Kung Fu Hustle","description":"Kung Fu Hustle (Chinese: \u529F\u592B; lit. \'Kung Fu\') is a 2004 martial arts action comedy film directed, produced and co-written by Stephen Chow, who also stars in the leading role, alongside Huang Shengyi, Yuen Wah, Yuen Qiu, Danny Chan Kwok-kwan and Leung Siu-lung in prominent roles. The story revolves around a murderous neighbourhood gang, a poor village with unlikely heroes and an aspiring gangster\'s fierce journey to find his true self. The martial arts choreography is supervised by Yuen Woo-ping.","imagePath":"https://upload.wikimedia.org/wikipedia/en/0/00/KungFuHustleHKposter.jpg","featured":false,"actors":[]},{"genre":{"type":"sci-fiction","description":"Science fiction (sometimes shortened to SF or sci-fi) is a genre of speculative fiction, which typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life. It is related to fantasy, horror, and superhero fiction and contains many subgenres. Its exact definition has long been disputed among authors, critics, scholars, and readers."},"director":{"name":"Eli Roth","bio":"Eli Raphael Roth (born April 18, 1972) is an American film director, screenwriter, producer, and actor. As a director and producer, he is most closely associated with the horror genre, namely splatter films, having directed the films Cabin Fever (2002) and Hostel (2005).","birthday":"1972-04-18T05:00:00.000Z","deathDate":null},"_id":"65ea7ff55c86da95258fee27","title":"Boarderlands","description":"Borderlands is an upcoming American science fiction action comedy film directed by Eli Roth, who co-wrote the screenplay with Joe Crombie, based on the video game series of the same name developed by Gearbox Software. It stars an ensemble cast featuring Cate Blanchett, Kevin Hart, Jack Black, Edgar Ram\xedrez, Ariana Greenblatt, Bobby Lee, Florian Munteanu, Gina Gershon, and Jamie Lee Curtis.","imagePath":"https://upload.wikimedia.org/wikipedia/en/7/7c/Borderlands_Teaser_Poster.jpg","featured":false,"actors":[]},{"genre":{"type":"horror","description":"Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs."},"director":{"name":"Hideo Nakata","bio":"Hideo Nakata (\u4E2D\u7530 \u79C0\u592B, Nakata Hideo, born July 19, 1961) is a Japanese filmmaker.","birthday":"1961-07-19T04:00:00.000Z","deathDate":null},"_id":"65ea7fc05c86da95258fee21","title":"Ring","description":"Ring (\u30EA\u30F3\u30B0, Ringu) is a 1998 Japanese supernatural psychological horror film directed by Hideo Nakata, based on the 1991 novel by Koji Suzuki. The film stars Nanako Matsushima, Miki Nakatani and Hiroyuki Sanada, and follows a reporter who is racing to investigate the mystery behind a cursed video tape; whoever watches the tape dies seven days after doing so. The film is titled The Ring (stylized as the Ring) in English in Japan and released as Ringu in North America.\\nProduction took approximately nine months.[4] Ring and its sequel Spiral were released in Japan at the same time. After its release, Ring was a huge box office success in Japan and was acclaimed by critics. It inspired numerous follow-ups in the Ring franchise, popularized Japanese horror (or \\"J-horror\\") internationally, and triggered a trend of Western remakes of J-horror films, including the 2002 American film The Ring.","imagePath":"https://upload.wikimedia.org/wikipedia/en/4/4a/Ringu_%281998%29_Japanese_theatrical_poster.jpg","featured":false,"actors":[]},{"genre":{"type":"sci-fiction","description":"Science fiction (sometimes shortened to SF or sci-fi) is a genre of speculative fiction, which typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life. It is related to fantasy, horror, and superhero fiction and contains many subgenres. Its exact definition has long been disputed among authors, critics, scholars, and readers."},"director":{"name":"James Cameron","bio":"James Francis Cameron CC (born August 16, 1954) is a Canadian filmmaker. He is a major figure in the post-New Hollywood era, and one of the industry\'\'s most innovative filmmakers. He often uses novel technologies with a classical filmmaking style. He first gained recognition for writing and directing The Terminator (1984) and found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), True Lies (1994), as well as Avatar (2009) and its sequels. He directed, wrote, co-produced, and co-edited Titanic (1997), winning three Academy Awards for Best Picture, Best Director, and Best Film Editing. He is a recipient of various other industry accolades, and three of his films have been selected for preservation in the National Film Registry by the Library of Congress.","birthday":"1954-08-16T04:00:00.000Z","deathDate":null},"_id":"65ea7fe55c86da95258fee25","title":"Avatar","description":"Avatar (marketed as James Cameron\'s Avatar) is a 2009 epic fantasy science fiction film directed, written, co-produced, and co-edited by James Cameron and starring Sam Worthington and Zoe Saldana as the title characters, with Stephen Lang, Michelle Rodriguez, and Sigourney Weaver in supporting roles. It is the first installment in the Avatar film series. It is set in the mid-22nd century, when humans are colonizing Pandora, a lush habitable moon of a gas giant in the Alpha Centauri star system, in order to mine the valuable mineral unobtanium. The expansion of the mining colony threatens the continued existence of a local tribe of Na\'vi, a humanoid species indigenous to Pandora. The title of the film refers to a genetically engineered Na\'vi body operated from the brain of a remotely located human that is used to interact with the natives of Pandora.","imagePath":"https://upload.wikimedia.org/wikipedia/en/d/d6/Avatar_%282009_film%29_poster.jpg","featured":false,"actors":[]}]');
+
+},{}],"lJZlQ":[function() {},{}]},["gjUm6","1xC6H","d8Dch"], "d8Dch", "parcelRequire6ce0")
+
+//# sourceMappingURL=index.b4b6dfad.js.map

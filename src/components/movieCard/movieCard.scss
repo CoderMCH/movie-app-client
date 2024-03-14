@@ -1,0 +1,10 @@
+.movieCard {
+    display: table;
+    min-height: 80px;
+    padding: 10px;
+
+    &:hover {
+        background-color: grey;
+        color: orange;
+    }
+}

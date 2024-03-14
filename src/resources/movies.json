@@ -1,0 +1,182 @@
+[
+    {
+        "genre": {
+            "type": "sci-fiction",
+            "description": "Science fiction (sometimes shortened to SF or sci-fi) is a genre of speculative fiction, which typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life. It is related to fantasy, horror, and superhero fiction and contains many subgenres. Its exact definition has long been disputed among authors, critics, scholars, and readers."
+        },
+        "director": {
+            "name": "James Cameron",
+            "bio": "James Francis Cameron CC (born August 16, 1954) is a Canadian filmmaker. He is a major figure in the post-New Hollywood era, and one of the industry''s most innovative filmmakers. He often uses novel technologies with a classical filmmaking style. He first gained recognition for writing and directing The Terminator (1984) and found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), True Lies (1994), as well as Avatar (2009) and its sequels. He directed, wrote, co-produced, and co-edited Titanic (1997), winning three Academy Awards for Best Picture, Best Director, and Best Film Editing. He is a recipient of various other industry accolades, and three of his films have been selected for preservation in the National Film Registry by the Library of Congress.",
+            "birthday": "1954-08-16T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7fed5c86da95258fee26",
+        "title": "Avatar: The Way of Water",
+        "description": "Avatar: The Way of Water is a 2022 American epic science fiction film co-produced and directed by James Cameron, who co-wrote the screenplay with Rick Jaffa and Amanda Silver from a story the trio wrote with Josh Friedman and Shane Salerno. Distributed by 20th Century Studios, it is the sequel to Avatar (2009) and the second installment in the Avatar film series. It features Sam Worthington, Zoe Saldaña and Stephen Lang reprising their roles from the first film, with Sigourney Weaver returning in an new role and Kate Winslet joining the cast. It follows a blue-skinned humanoid Na'vi named Jake Sully (Worthington) as he and his family, under renewed human threat, seek refuge with the aquatic Metkayina clan of Pandora, a habitable exomoon on which they live.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/5/54/Avatar_The_Way_of_Water_poster.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "comedy",
+            "description": "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."
+        },
+        "director": {
+            "name": "Stephen Chow",
+            "bio": "Stephen Chow Sing-chi (Chinese: 周星馳; Jyutping: zau1 sing1 ci4; Cantonese Yale: Jāu Sīngchìh, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.",
+            "birthday": "1962-06-22T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7fc95c86da95258fee22",
+        "title": "Shaolin Soccer",
+        "description": "Shaolin Soccer (Chinese: 少林足球) is a 2001 Hong Kong sports comedy film directed by Stephen Chow, who also stars in the lead role. The film revolves around a former Shaolin monk who reunites his five brothers,[note 1] years after their master's death, to apply their superhuman martial arts skills to play soccer and bring Shaolin kung fu to the masses.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/3/3e/ShaolinSoccerFilmPoster.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "comedy",
+            "description": "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."
+        },
+        "director": {
+            "name": "Stephen Chow",
+            "bio": "Stephen Chow Sing-chi (Chinese: 周星馳; Jyutping: zau1 sing1 ci4; Cantonese Yale: Jāu Sīngchìh, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.",
+            "birthday": "1962-06-22T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea80065c86da95258fee29",
+        "title": "The God of Cookery",
+        "description": "The God of Cookery (Chinese: 食神) is a 1996 Hong Kong comedy film which was co-directed by Stephen Chow and Lee Lik-chi. The film features an ensemble cast include Stephen Chow, Karen Mok, Vincent Kok and Richard Ng.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/9/9c/GodOfCookery.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "horror",
+            "description": "Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs."
+        },
+        "director": {
+            "name": "Hideo Nakata",
+            "bio": "Hideo Nakata (中田 秀夫, Nakata Hideo, born July 19, 1961) is a Japanese filmmaker.",
+            "birthday": "1961-07-19T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7ffe5c86da95258fee28",
+        "title": "The Ring Two",
+        "description": "The Ring Two is a 2005 American psychological supernatural horror film and sequel to the 2002 film The Ring, which was a remake of the 1998 Japanese film Ring. Hideo Nakata, director of the original Ring, directed this film in place of Gore Verbinski. Noam Murro was attached before Nakata, but left due to creative differences. Naomi Watts, David Dorfman and Daveigh Chase reprised their roles with Simon Baker, Elizabeth Perkins and Sissy Spacek joining the cast.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/1/15/Ring_two_ver2.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "comedy",
+            "description": "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."
+        },
+        "director": {
+            "name": "Stephen Chow",
+            "bio": "Stephen Chow Sing-chi (Chinese: 周星馳; Jyutping: zau1 sing1 ci4; Cantonese Yale: Jāu Sīngchìh, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.",
+            "birthday": "1962-06-22T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea800e5c86da95258fee2a",
+        "title": "King of Comedy",
+        "description": "King of Comedy (Chinese: 喜劇之王) is a 1999 Hong Kong comedy film directed by Lee Lik-chi and Stephen Chow. The New King of Comedy, a remake set in mainland China, was released in 2019.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/4/4c/Chows_KING_OF_COMEDY.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "horror",
+            "description": "Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs."
+        },
+        "director": {
+            "name": "Jaume Collet-Serra",
+            "bio": "Jaume Collet-Serra (Catalan: [ˈʒawmə kuˈʎɛt ˈsɛrə]; born 23 March 1974) is a Spanish-American film director and producer. He directed the horror films House of Wax (2005), Orphan (2009), and The Shallows (2016), as well as the Liam Neeson-led thriller films Unknown (2011), Non-Stop (2014), Run All Night (2015), and The Commuter (2018). Collet-Serra also directed the Dwayne Johnson-led films, Jungle Cruise (2021), based on the eponymous theme park attraction from Disney, and Black Adam (2022), based on the comic book character of the same name from DC.",
+            "birthday": "1974-03-23T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7fdd5c86da95258fee24",
+        "title": "Orphan",
+        "description": "Orphan is a 2009 psychological horror film directed by Jaume Collet-Serra and written by David Leslie Johnson from a story by Alex Mace. The film stars Vera Farmiga, Peter Sarsgaard, Isabelle Fuhrman, CCH Pounder, Jimmy Bennett and Aryana Engineer. The plot centers on a couple who, after the death of their unborn child, adopt a psychopathic nine-year-old girl with a mysterious past.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/4/47/Orphanposter.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "comedy",
+            "description": "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."
+        },
+        "director": {
+            "name": "Stephen Chow",
+            "bio": "Stephen Chow Sing-chi (Chinese: 周星馳; Jyutping: zau1 sing1 ci4; Cantonese Yale: Jāu Sīngchìh, born 22 June 1962) is a Hong Kong filmmaker, former actor and comedian, known for Shaolin Soccer and Kung Fu Hustle.",
+            "birthday": "1962-06-22T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7fd25c86da95258fee23",
+        "title": "Kung Fu Hustle",
+        "description": "Kung Fu Hustle (Chinese: 功夫; lit. 'Kung Fu') is a 2004 martial arts action comedy film directed, produced and co-written by Stephen Chow, who also stars in the leading role, alongside Huang Shengyi, Yuen Wah, Yuen Qiu, Danny Chan Kwok-kwan and Leung Siu-lung in prominent roles. The story revolves around a murderous neighbourhood gang, a poor village with unlikely heroes and an aspiring gangster's fierce journey to find his true self. The martial arts choreography is supervised by Yuen Woo-ping.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/0/00/KungFuHustleHKposter.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "sci-fiction",
+            "description": "Science fiction (sometimes shortened to SF or sci-fi) is a genre of speculative fiction, which typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life. It is related to fantasy, horror, and superhero fiction and contains many subgenres. Its exact definition has long been disputed among authors, critics, scholars, and readers."
+        },
+        "director": {
+            "name": "Eli Roth",
+            "bio": "Eli Raphael Roth (born April 18, 1972) is an American film director, screenwriter, producer, and actor. As a director and producer, he is most closely associated with the horror genre, namely splatter films, having directed the films Cabin Fever (2002) and Hostel (2005).",
+            "birthday": "1972-04-18T05:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7ff55c86da95258fee27",
+        "title": "Boarderlands",
+        "description": "Borderlands is an upcoming American science fiction action comedy film directed by Eli Roth, who co-wrote the screenplay with Joe Crombie, based on the video game series of the same name developed by Gearbox Software. It stars an ensemble cast featuring Cate Blanchett, Kevin Hart, Jack Black, Edgar Ramírez, Ariana Greenblatt, Bobby Lee, Florian Munteanu, Gina Gershon, and Jamie Lee Curtis.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/7/7c/Borderlands_Teaser_Poster.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "horror",
+            "description": "Horror is a film genre that seeks to elicit fear or disgust in its audience for entertainment purposes. Horror films often explore dark subject matter and may deal with transgressive topics or themes. Broad elements include monsters, apocalyptic events, and religious or folk beliefs."
+        },
+        "director": {
+            "name": "Hideo Nakata",
+            "bio": "Hideo Nakata (中田 秀夫, Nakata Hideo, born July 19, 1961) is a Japanese filmmaker.",
+            "birthday": "1961-07-19T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7fc05c86da95258fee21",
+        "title": "Ring",
+        "description": "Ring (リング, Ringu) is a 1998 Japanese supernatural psychological horror film directed by Hideo Nakata, based on the 1991 novel by Koji Suzuki. The film stars Nanako Matsushima, Miki Nakatani and Hiroyuki Sanada, and follows a reporter who is racing to investigate the mystery behind a cursed video tape; whoever watches the tape dies seven days after doing so. The film is titled The Ring (stylized as the Ring) in English in Japan and released as Ringu in North America.\nProduction took approximately nine months.[4] Ring and its sequel Spiral were released in Japan at the same time. After its release, Ring was a huge box office success in Japan and was acclaimed by critics. It inspired numerous follow-ups in the Ring franchise, popularized Japanese horror (or \"J-horror\") internationally, and triggered a trend of Western remakes of J-horror films, including the 2002 American film The Ring.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/4/4a/Ringu_%281998%29_Japanese_theatrical_poster.jpg",
+        "featured": false,
+        "actors": []
+    },
+    {
+        "genre": {
+            "type": "sci-fiction",
+            "description": "Science fiction (sometimes shortened to SF or sci-fi) is a genre of speculative fiction, which typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life. It is related to fantasy, horror, and superhero fiction and contains many subgenres. Its exact definition has long been disputed among authors, critics, scholars, and readers."
+        },
+        "director": {
+            "name": "James Cameron",
+            "bio": "James Francis Cameron CC (born August 16, 1954) is a Canadian filmmaker. He is a major figure in the post-New Hollywood era, and one of the industry''s most innovative filmmakers. He often uses novel technologies with a classical filmmaking style. He first gained recognition for writing and directing The Terminator (1984) and found further success with Aliens (1986), The Abyss (1989), Terminator 2: Judgment Day (1991), True Lies (1994), as well as Avatar (2009) and its sequels. He directed, wrote, co-produced, and co-edited Titanic (1997), winning three Academy Awards for Best Picture, Best Director, and Best Film Editing. He is a recipient of various other industry accolades, and three of his films have been selected for preservation in the National Film Registry by the Library of Congress.",
+            "birthday": "1954-08-16T04:00:00.000Z",
+            "deathDate": null
+        },
+        "_id": "65ea7fe55c86da95258fee25",
+        "title": "Avatar",
+        "description": "Avatar (marketed as James Cameron's Avatar) is a 2009 epic fantasy science fiction film directed, written, co-produced, and co-edited by James Cameron and starring Sam Worthington and Zoe Saldana as the title characters, with Stephen Lang, Michelle Rodriguez, and Sigourney Weaver in supporting roles. It is the first installment in the Avatar film series. It is set in the mid-22nd century, when humans are colonizing Pandora, a lush habitable moon of a gas giant in the Alpha Centauri star system, in order to mine the valuable mineral unobtanium. The expansion of the mining colony threatens the continued existence of a local tribe of Na'vi, a humanoid species indigenous to Pandora. The title of the film refers to a genetically engineered Na'vi body operated from the brain of a remotely located human that is used to interact with the natives of Pandora.",
+        "imagePath": "https://upload.wikimedia.org/wikipedia/en/d/d6/Avatar_%282009_film%29_poster.jpg",
+        "featured": false,
+        "actors": []
+    }
+]
