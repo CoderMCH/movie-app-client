@@ -1,4 +1,23 @@
+.movieCard {
+  min-height: 80px;
+  padding: 10px;
+  display: table;
+}
+
+.movieCard:hover {
+  color: orange;
+  background-color: gray;
+}
+
+div.movieView > div {
+  margin-bottom: 10px;
+}
+
+body {
+  background-color: #000;
+}
+
 .my-flix {
-  color: #4682b4;
+  color: #add8e6;
 }
 /*# sourceMappingURL=index.2212206d.css.map */
