@@ -27203,19 +27203,57 @@ const MainView = ()=>{
             console.error(err);
         });
     }, []);
-    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        movie: selectedMovie,
-        onBackClick: ()=>setSelectedMovie(null)
-    }, void 0, false, {
-        fileName: "src/components/mainView/mainView.jsx",
-        lineNumber: 23,
-        columnNumber: 16
-    }, undefined);
+    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                movie: selectedMovie,
+                onBackClick: ()=>setSelectedMovie(null)
+            }, void 0, false, {
+                fileName: "src/components/mainView/mainView.jsx",
+                lineNumber: 24,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                fileName: "src/components/mainView/mainView.jsx",
+                lineNumber: 25,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                children: "Similar movies"
+            }, void 0, false, {
+                fileName: "src/components/mainView/mainView.jsx",
+                lineNumber: 26,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                style: {
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr 1fr"
+                },
+                children: movies.filter((movie)=>movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map((movie)=>{
+                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                        movie: movie,
+                        onMovieClick: ()=>{
+                            setSelectedMovie(movie);
+                        }
+                    }, movie._id, false, {
+                        fileName: "src/components/mainView/mainView.jsx",
+                        lineNumber: 30,
+                        columnNumber: 32
+                    }, undefined);
+                })
+            }, void 0, false, {
+                fileName: "src/components/mainView/mainView.jsx",
+                lineNumber: 27,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/mainView/mainView.jsx",
-        lineNumber: 27,
+        lineNumber: 41,
         columnNumber: 16
     }, undefined);
     let nthMovie = 0;
@@ -27234,13 +27272,13 @@ const MainView = ()=>{
                 }
             }, movie._id, false, {
                 fileName: "src/components/mainView/mainView.jsx",
-                lineNumber: 36,
+                lineNumber: 50,
                 columnNumber: 28
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/mainView/mainView.jsx",
-        lineNumber: 32,
+        lineNumber: 46,
         columnNumber: 9
     }, undefined);
 };

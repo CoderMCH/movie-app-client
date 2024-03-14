@@ -20,7 +20,21 @@ export const MainView = () => {
     }, [])
 
     if (selectedMovie) {
-        return <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
+        return <>
+            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+            <hr />
+            <h2>Similar movies</h2>
+            <div style={ {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"} }>
+                {
+                    movies.filter(movie => movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map(movie => {
+                        return <MovieCard key={ movie._id } movie={ movie }
+                                onMovieClick={() => {
+                                    setSelectedMovie(movie);
+                                }} />
+                    })
+                }
+            </div>
+        </>
     }
 
     if (movies.length === 0) {
