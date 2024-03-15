@@ -1,23 +1,35 @@
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movieCard/movieCard";
 import { MovieView } from "../movieView/movieView";
+import { LoginView } from "../loginView/loginView";
+import { RegisterView } from "../registerView/registerView";
+
+// const appUrl = "https://mch-flix-app-813b2fce5e48.herokuapp.com";
+const appUrl = "https://mch-flix-app-813b2fce5e48.herokuapp.com"
+// temp token for bypass server auth
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmMjg4NzgxNGQzYTQzM2RiMDE4ODciLCJ1c2VybmFtZSI6Imhlcm9rdVRlc3QiLCJwYXNzd29yZCI6IiQyYiQxMCRDTzg5cWFoY2p2MWcydUVwajFoOC9PN2JPZkVIVkFvNmxYdnR5NFdxZGN2V3JhNFBEMzJTbSIsImVtYWlsIjoidGVzdEBoZXJva3UuY29tIiwiZmF2b3JpdGVNb3ZpZXMiOltdLCJfX3YiOjAsImlhdCI6MTcxMDE3MjcwNSwiZXhwIjoxNzEwNzc3NTA1LCJzdWIiOiJoZXJva3VUZXN0In0.2VEJZkz0y5rgJ3kT-k4Vzkz5eTUBRj0BrO3657fn4pc";
 
 export const MainView = () => {
-    const [movies, setMovies] = useState([]);
+    const [user, setUser] = useState(null);
+    if (!user) {
+        return <>
+            <LoginView url={appUrl} onLoggedIn={(userData) => {setUser(userData)}}/>
+            <br></br>
+            <RegisterView url={appUrl} onLoggedIn={(userData) => {setUser(userData)}}/>
+        </>
+    }
 
+    const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     useEffect(() => {
-        let url = "https://mch-flix-app-813b2fce5e48.herokuapp.com/movies";
-        // temp token for bypass server auth
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmMjg4NzgxNGQzYTQzM2RiMDE4ODciLCJ1c2VybmFtZSI6Imhlcm9rdVRlc3QiLCJwYXNzd29yZCI6IiQyYiQxMCRDTzg5cWFoY2p2MWcydUVwajFoOC9PN2JPZkVIVkFvNmxYdnR5NFdxZGN2V3JhNFBEMzJTbSIsImVtYWlsIjoidGVzdEBoZXJva3UuY29tIiwiZmF2b3JpdGVNb3ZpZXMiOlsiNjVlYTdmYzA1Yzg2ZGE5NTI1OGZlZTIxIiwiNjVlYTdmYzA1Yzg2ZGE5NTI1OGZlZTIxIiwiNjVlYTdmZTU1Yzg2ZGE5NTI1OGZlZTI1IiwiNjVlYTdmZWQ1Yzg2ZGE5NTI1OGZlZTI2Il0sIl9fdiI6MCwiaWF0IjoxNzEwMjkzMzY4LCJleHAiOjE3MTA4OTgxNjgsInN1YiI6Imhlcm9rdVRlc3QifQ.ymxaWZn5UPPoiXnW3LSu5pCm6rX5SLPZAMlrQ-6g9zY";
-        fetch(url, {method: "GET", headers: { 'Authorization': `Bearer ${token}` }})
+        fetch(appUrl + "/movies", {method: "GET", headers: { 'Authorization': `Bearer ${token}` }})
             .then((response) => response.json())
             .then((data) => {
                 setMovies(data);
             }).catch(err => {
                 console.error(err);
             })
-    }, [])
+    }, [user.token])
 
     if (selectedMovie) {
         return <>
