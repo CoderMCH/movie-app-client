@@ -16,7 +16,7 @@ export const RegisterView = ({url, onRegister}) => {
         };
         console.log("JSON " + JSON.stringify(registerData))
 
-        fetch(`${url}/user`, { method: "POST", body: JSON.stringify(registerData), mode: "no-cors" }).then(res => {
+        fetch(`${url}/user`, { method: "POST", body: JSON.stringify(registerData) }).then(res => {
             console.log(res);
         }).catch(err => {
             console.log(err);
