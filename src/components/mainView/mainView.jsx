@@ -12,7 +12,14 @@ export const MainView = () => {
     const [user, setUser] = useState(storedUser && "username" in storedUser ? storedUser : null);
     if (!user) {
         return <>
-            <LoginView url={appUrl} onLoggedIn={(userData) => {setUser(userData)}}/>
+            <LoginView url={appUrl} onLoggedIn={(err, user) => {
+                if (err) {
+                    alert(`Login fail\nError: ${err}`);
+                } else {
+                    alert(`Login success\nUsername: ${user.username}`)
+                    setUser(user);
+                }
+            }}/>
             <br></br>
             <RegisterView url={appUrl} onRegister={(err, username) => {
                 if (err) {
@@ -23,6 +30,11 @@ export const MainView = () => {
             }}/>
         </>
     }
+
+    const logoutBtn = <button onClick={() => {
+        localStorage.clear();
+        setUser(null);
+    }}>Logout</button>
 
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -61,10 +73,7 @@ export const MainView = () => {
     let nthMovie = 0;
     return (
         <>
-            <button onClick={() => {
-                setUser(null);
-                localStorage.setItem("user", null);
-                }}>Logout</button>
+            {logoutBtn}
             <div style={ {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"} }>
                 {
                     movies.map((movie) => {
