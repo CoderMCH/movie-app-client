@@ -14,12 +14,20 @@ export const RegisterView = ({url, onRegister}) => {
             "email": email,
             "birthday": birthday
         };
-        console.log("JSON " + JSON.stringify(registerData))
 
-        fetch(`${url}/user`, { method: "POST", body: JSON.stringify(registerData) }).then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err);
+        fetch(url + "/user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(registerData) }).then(res => {
+            if (res.ok) {
+                res.json().then(user => {
+                    onRegister(null, user.username);
+                })
+            }
+            else {
+                res.text().then(text => {
+                    onRegister(text, null);
+                })
+            }
+        }).catch(fetchErr => {
+            console.error(fetchErr);
         })
     }
 
