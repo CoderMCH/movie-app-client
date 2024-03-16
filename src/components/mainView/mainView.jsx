@@ -50,6 +50,7 @@ export const MainView = () => {
 
     if (selectedMovie) {
         return <>
+            {logoutBtn}
             <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
             <hr />
             <h2>Similar movies</h2>
