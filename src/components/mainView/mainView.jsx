@@ -3,45 +3,18 @@ import { MovieCard } from "../movieCard/movieCard";
 import { MovieView } from "../movieView/movieView";
 import { LoginView } from "../loginView/loginView";
 import { RegisterView } from "../registerView/registerView";
-import { Button, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { BrowserRouter, Link, Navigate, Route, Routes, useParams } from "react-router-dom";
+import { NavBar } from "../navBar/navBar";
 
 const appUrl = "https://mch-flix-app-813b2fce5e48.herokuapp.com"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWY0Y2NjMGJmZDE0ODM5NTIxMDhkMmYiLCJ1c2VybmFtZSI6Ik1DSDEyMyIsInBhc3N3b3JkIjoiJDJiJDEwJHlJakFTSG9iQUV4aE0yQXliV1o4aHUzWDNsNndvbVY5MEVKVFBIM3JWMUw2RVUyTUltMXVhIiwiZW1haWwiOiJtYW5jaGluZ2hpbkBnbWFpbC5jb20iLCJiaXJ0aGRheSI6bnVsbCwiZmF2b3JpdGVNb3ZpZXMiOltdLCJfX3YiOjAsImlhdCI6MTcxMDY1MzE1NSwiZXhwIjoxNzExMjU3OTU1LCJzdWIiOiJNQ0gxMjMifQ.MpUuyZ-boIorZVjWOcPwkCJfI_KUDhBteynILCoHOjU";
 
 export const MainView = () => {
     // user: { username: "", token: "" }
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const [user, setUser] = useState(storedUser && "username" in storedUser ? storedUser : null);
-    if (!user) {
-        return <Row className="justify-content-md-center">
-            <Col md={5}>
-                <LoginView url={appUrl} onLoggedIn={(err, user) => {
-                    if (err) {
-                        alert(`Login fail\nError: ${err}`);
-                    } else {
-                        alert(`Login success\nUsername: ${user.username}`)
-                        setUser(user);
-                    }
-                }}/>
-                <br></br>
-                <RegisterView url={appUrl} onRegister={(err, username) => {
-                    if (err) {
-                        alert(`Register fail\nError: ${err}`);
-                    } else {
-                        alert(`Register success\nUsername: ${username}`);
-                    }
-                }}/>
-            </Col>
-        </Row>
-    }
-
-    const logoutBtn = <Button variant="warning" style={{ marginBottom: "5px" }}
-        onClick={() => {
-            localStorage.clear();
-            setUser(null);
-    }}>Logout</Button>
-
     const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
     useEffect(() => {
         fetch(appUrl + "/movies", {method: "GET", headers: { 'Authorization': `Bearer ${user.token}` }})
             .then((response) => response.json())
@@ -50,47 +23,59 @@ export const MainView = () => {
             }).catch(err => {
                 console.error(err);
             })
-    }, [user.token])
+    }, [user])
 
-    if (selectedMovie) {
-        return <>
-            {logoutBtn}
-            <MovieView className="h-100" movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-            <hr />
-            <h2>Movies you may like</h2>
-            <Row>{
-                movies.filter(movie => movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map(movie => {
-                    return <Col md={3} key={ movie._id }>
-                        <MovieCard movie={ movie }
-                            onMovieClick={() => {
-                                setSelectedMovie(movie);
-                            }} />
-                    </Col> 
-                })
-            }</Row>
-        </>
-    }
-
-    if (movies.length === 0) {
-        return <div>The list is empty!</div>;
-    }
-    
     return (
-        <>
-            {logoutBtn}
-            <Row>
-            {
-                movies.map((movie) => {
-                    return <Col md={3} key={ movie._id }>
-                        <MovieCard movie={ movie }
-                        onMovieClick={() => {
-                            setSelectedMovie(movie);
-                        }} />
-                    </Col>
-                })
-            }
+        <BrowserRouter>
+            <NavBar></NavBar>
+            <Row className="justify-content-md-center">
+                <Routes>
+                    <Route path="/" element={ <>HomePage</> } />
+                    <Route path="/login" element={
+                        user ? <Navigate to="/" /> :
+                        <Col md={5}>
+                            <LoginView url={appUrl} onLoggedIn={(err, user) => {
+                                if (err) {
+                                    alert(`Login fail\nError: ${err}`);
+                                } else {
+                                    alert(`Login success\nUsername: ${user.username}`)
+                                    setUser(user);
+                                }
+                            }}/>
+                        </Col>
+                    } />
+                    <Route path="/signup" element={
+                        user ? <Navigate to="/" /> :
+                        <Col md={5}>
+                            <RegisterView url={appUrl} onRegister={(err, username) => {
+                                if (err) {
+                                    alert(`Register fail\nError: ${err}`);
+                                } else {
+                                    alert(`Register success\nUsername: ${username}`);
+                                }
+                            }}/>
+                        </Col>
+                    } />
+                    <Route path="/movies" element={
+                        !user ? <Navigate to={"/login"} /> :
+                        (movies.length === 0) ? <>The list is empty</> :
+                            <Row>{movies.map((movie) => {
+                                return <Col md={3} key={ movie._id }>
+                                    <Link to={`/movie/${movie._id}`}>
+                                        <MovieCard movie={ movie } />
+                                    </Link>
+                                </Col>
+                            })}</Row>
+                    } />
+                    <Route path="/movie/:id" element={
+                        !user ? <Navigate to={"/"} /> : <MovieView className="h-100" movies={movies} />
+                    } />
+                    <Route path="/user" element={
+                        user ? <>User Page</> : <Navigate to={"/login"} />
+                    } />
+                </Routes>
             </Row>
-        </>
-    );
+        </BrowserRouter>
+    )
     
 };

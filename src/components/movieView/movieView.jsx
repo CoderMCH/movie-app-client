@@ -1,35 +1,40 @@
 import "./movieView.scss";
-import PropTypes from "prop-types"
 import { Button, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { MovieCard } from "../movieCard/movieCard";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+    let { id } = useParams();
+    let selectedMovie = movies.find(movie => movie._id == id);
     return (
+    !selectedMovie ? <>Movie not found</> :
+    <>
         <Row className="movieView">
             <Col md={3}>
-                <img src={movie.imagePath} alt="" />
+                <img src={selectedMovie.imagePath} alt="" />
             </Col>
             <Col md={9}>
-                <div>Title: {movie.title}</div>
-                <div>Director: {movie.director.name}</div>
-                <div>Genre: {movie.genre.type}</div>
-                <div>Description: {movie.description}</div>
+                <div>Title: {selectedMovie.title}</div>
+                <div>Director: {selectedMovie.director.name}</div>
+                <div>Genre: {selectedMovie.genre.type}</div>
+                <div>Description: {selectedMovie.description}</div>
             </Col>
-            <Button variant="secondary" onClick={() => onBackClick()}>Back</Button>
-        </Row>
+            <Link to="/movies">
+                <Button variant="secondary">Back</Button>
+            </Link>
+            </Row>
+            <hr />
+            <h2>Movies you may like</h2>
+            <Row>{
+                movies.filter(movie => movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map(movie => {
+                    return <Col md={3} key={ movie._id }>
+                        <Link to={`/movie/${movie._id}`}>
+                            <MovieCard movie={ movie } />
+                        </Link>
+                    </Col> 
+                })
+            }</Row>
+        </>
     );
 };
-
-MovieView.propTypes = {
-    movie: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        director: {
-            name: PropTypes.string
-        },
-        genre: {
-            type: PropTypes.string
-        },
-        description: PropTypes.string.isRequired,
-        imagePath: PropTypes.string
-    }).isRequired,
-    onBackClick: PropTypes.func.isRequired
-}
