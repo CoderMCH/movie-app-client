@@ -3,6 +3,7 @@ import { MovieCard } from "../movieCard/movieCard";
 import { MovieView } from "../movieView/movieView";
 import { LoginView } from "../loginView/loginView";
 import { RegisterView } from "../registerView/registerView";
+import { Button, Row, Col } from "react-bootstrap";
 
 const appUrl = "https://mch-flix-app-813b2fce5e48.herokuapp.com"
 
@@ -11,30 +12,33 @@ export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const [user, setUser] = useState(storedUser && "username" in storedUser ? storedUser : null);
     if (!user) {
-        return <>
-            <LoginView url={appUrl} onLoggedIn={(err, user) => {
-                if (err) {
-                    alert(`Login fail\nError: ${err}`);
-                } else {
-                    alert(`Login success\nUsername: ${user.username}`)
-                    setUser(user);
-                }
-            }}/>
-            <br></br>
-            <RegisterView url={appUrl} onRegister={(err, username) => {
-                if (err) {
-                    alert(`Register fail\nError: ${err}`);
-                } else {
-                    alert(`Register success\nUsername: ${username}`);
-                }
-            }}/>
-        </>
+        return <Row className="justify-content-md-center">
+            <Col md={5}>
+                <LoginView url={appUrl} onLoggedIn={(err, user) => {
+                    if (err) {
+                        alert(`Login fail\nError: ${err}`);
+                    } else {
+                        alert(`Login success\nUsername: ${user.username}`)
+                        setUser(user);
+                    }
+                }}/>
+                <br></br>
+                <RegisterView url={appUrl} onRegister={(err, username) => {
+                    if (err) {
+                        alert(`Register fail\nError: ${err}`);
+                    } else {
+                        alert(`Register success\nUsername: ${username}`);
+                    }
+                }}/>
+            </Col>
+        </Row>
     }
 
-    const logoutBtn = <button onClick={() => {
-        localStorage.clear();
-        setUser(null);
-    }}>Logout</button>
+    const logoutBtn = <Button variant="warning" style={{ marginBottom: "5px" }}
+        onClick={() => {
+            localStorage.clear();
+            setUser(null);
+    }}>Logout</Button>
 
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -51,19 +55,19 @@ export const MainView = () => {
     if (selectedMovie) {
         return <>
             {logoutBtn}
-            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+            <MovieView className="h-100" movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
             <hr />
-            <h2>Similar movies</h2>
-            <div style={ {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"} }>
-                {
-                    movies.filter(movie => movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map(movie => {
-                        return <MovieCard key={ movie._id } movie={ movie }
-                                onMovieClick={() => {
-                                    setSelectedMovie(movie);
-                                }} />
-                    })
-                }
-            </div>
+            <h2>Movies you may like</h2>
+            <Row>{
+                movies.filter(movie => movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map(movie => {
+                    return <Col md={3} key={ movie._id }>
+                        <MovieCard movie={ movie }
+                            onMovieClick={() => {
+                                setSelectedMovie(movie);
+                            }} />
+                    </Col> 
+                })
+            }</Row>
         </>
     }
 
@@ -71,20 +75,21 @@ export const MainView = () => {
         return <div>The list is empty!</div>;
     }
     
-    let nthMovie = 0;
     return (
         <>
             {logoutBtn}
-            <div style={ {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"} }>
-                {
-                    movies.map((movie) => {
-                        nthMovie++;
-                        return <MovieCard key={ movie._id } nthMovie={ nthMovie } movie={ movie }
-                                onMovieClick={() => {
-                                    setSelectedMovie(movie);
-                                }} />
-                    })}
-            </div>
+            <Row>
+            {
+                movies.map((movie) => {
+                    return <Col md={3} key={ movie._id }>
+                        <MovieCard movie={ movie }
+                        onMovieClick={() => {
+                            setSelectedMovie(movie);
+                        }} />
+                    </Col>
+                })
+            }
+            </Row>
         </>
     );
     

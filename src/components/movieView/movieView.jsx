@@ -1,19 +1,21 @@
 import "./movieView.scss";
 import PropTypes from "prop-types"
+import { Button, Row, Col } from "react-bootstrap";
 
 export const MovieView = ({ movie, onBackClick }) => {
     return (
-        <div className="movieView">
-            <div>
-                <img src={movie.imagePath} />
-            </div>
-            <div>Title: {movie.title}</div>
-            <div>Director: {movie.director.name}</div>
-            <div>Genre: {movie.genre.type}</div>
-            <div>Description: {movie.description}</div>
-
-            <button onClick={() => onBackClick()}>Back</button>
-        </div>
+        <Row className="movieView">
+            <Col md={3}>
+                <img src={movie.imagePath} alt="" />
+            </Col>
+            <Col md={9}>
+                <div>Title: {movie.title}</div>
+                <div>Director: {movie.director.name}</div>
+                <div>Genre: {movie.genre.type}</div>
+                <div>Description: {movie.description}</div>
+            </Col>
+            <Button variant="secondary" onClick={() => onBackClick()}>Back</Button>
+        </Row>
     );
 };
 

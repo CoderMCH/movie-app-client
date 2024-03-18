@@ -2,9 +2,14 @@
     display: table;
     min-height: 80px;
     padding: 10px;
+    border: 5px solid black;
 
     &:hover {
         background-color: grey;
         color: orange;
+    }
+
+    img {
+        width: 100%;
     }
 }
