@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { API } from "../../functions/api";
 
-export const RegisterView = ({url, onRegister}) => {
+export const RegisterView = ({onRegister}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -16,20 +17,7 @@ export const RegisterView = ({url, onRegister}) => {
             "birthday": birthday
         };
 
-        fetch(url + "/user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(registerData) }).then(res => {
-            if (res.ok) {
-                res.json().then(user => {
-                    onRegister(null, user.username);
-                })
-            }
-            else {
-                res.text().then(text => {
-                    onRegister(text, null);
-                })
-            }
-        }).catch(fetchErr => {
-            console.error(fetchErr);
-        })
+        API.register(registerData, onRegister);
     }
 
     return (

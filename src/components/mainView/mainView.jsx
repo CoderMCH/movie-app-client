@@ -7,24 +7,15 @@ import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Link, Navigate, Route, Routes, useParams } from "react-router-dom";
 import { NavBar } from "../navBar/navBar";
 import { ProfileView } from "../profileView/profileView";
-
-const appUrl = "https://mch-flix-app-813b2fce5e48.herokuapp.com"
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWY0Y2NjMGJmZDE0ODM5NTIxMDhkMmYiLCJ1c2VybmFtZSI6Ik1DSDEyMyIsInBhc3N3b3JkIjoiJDJiJDEwJHlJakFTSG9iQUV4aE0yQXliV1o4aHUzWDNsNndvbVY5MEVKVFBIM3JWMUw2RVUyTUltMXVhIiwiZW1haWwiOiJtYW5jaGluZ2hpbkBnbWFpbC5jb20iLCJiaXJ0aGRheSI6bnVsbCwiZmF2b3JpdGVNb3ZpZXMiOltdLCJfX3YiOjAsImlhdCI6MTcxMDY1MzE1NSwiZXhwIjoxNzExMjU3OTU1LCJzdWIiOiJNQ0gxMjMifQ.MpUuyZ-boIorZVjWOcPwkCJfI_KUDhBteynILCoHOjU";
+import { API } from "../../functions/api";
 
 export const MainView = () => {
-    // user: { username: "", token: "", _id: "" }
+    // user: { username: "", password: "", email: "", birthday: "", token: "", _id: "" }
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const [user, setUser] = useState(storedUser && "username" in storedUser ? storedUser : null);
     const [movies, setMovies] = useState([]);
     useEffect(() => {
-        if (!user) return;
-        fetch(appUrl + "/movies", {method: "GET", headers: { 'Authorization': `Bearer ${user.token}` }})
-            .then((response) => response.json())
-            .then((data) => {
-                setMovies(data);
-            }).catch(err => {
-                console.error(err);
-            })
+        API.getMoviesList(user, (data) => {setMovies(data)});
     }, [user])
 
     return (
@@ -36,7 +27,7 @@ export const MainView = () => {
                     <Route path="/login" element={
                         user ? <Navigate to="/" /> :
                         <Col md={5}>
-                            <LoginView url={appUrl} onLoggedIn={(err, user) => {
+                            <LoginView onLoggedIn={(err, user) => {
                                 if (err) {
                                     alert(`Login fail\nError: ${err}`);
                                 } else {
@@ -49,7 +40,7 @@ export const MainView = () => {
                     <Route path="/signup" element={
                         user ? <Navigate to="/" /> :
                         <Col md={5}>
-                            <RegisterView url={appUrl} onRegister={(err, username) => {
+                            <RegisterView onRegister={(err, username) => {
                                 if (err) {
                                     alert(`Register fail\nError: ${err}`);
                                 } else {
@@ -70,11 +61,25 @@ export const MainView = () => {
                             })}</Row>
                     } />
                     <Route path="/movie/:id" element={
-                        !user ? <Navigate to={"/"} /> : <MovieView className="h-100" movies={movies} />
+                        !user ? <Navigate to={"/"} /> : <MovieView className="h-100" user={user} movies={movies} />
                     } />
                     <Route path="/user" element={
                         !user ? <Navigate to={"/login"} /> :
-                        <ProfileView url={appUrl} user={user} movies={movies} />
+                        <ProfileView user={user} movies={movies}
+                        onUpdate={(mesg, newUser) => {
+                            if (mesg) {
+                                alert(`Update fail\nError: ${mesg}`)
+                            } else {
+                                newUser.token = user.token;
+                                setUser(newUser);
+                                localStorage.setItem("user", JSON.stringify(user));
+                                alert("Update Success");
+                            }
+                        }}
+                        onDeregister={(mesg) => {
+                            alert(mesg);
+                            setUser(null);
+                        }} />
                     } />
                 </Routes>
             </Row>

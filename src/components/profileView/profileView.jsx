@@ -1,27 +1,24 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, Form, Row, Col } from "react-bootstrap"
 import { MovieCard } from "../movieCard/movieCard";
+import { API } from "../../functions/api";
 
-export const ProfileView = ({ url, user, onUpdate, onDeregister, movies }) => {
+export const ProfileView = ({ user, onUpdate, onDeregister, movies }) => {
     // should be from fetching
     let [username, setUsername] = useState(user.username);
     let [password, setPassword] = useState(user.password);
     let [email, setEmail] = useState(user.email);
     let [birthday, setBirthday] = useState(user.birthday);
-    
+
     // need to add api
-    // fetch(url + `/user/${user._id}`, {method: "GET", headers: {'Authorization': `Bearer ${user.token}`}}).then(res => {
-    //     return res.json();
-    // }).then(json => {
-    //     console.log(json);
-    //     if (json.message) {
-    //         alert(json.message);
-    //     } else {
-    //         alert(json.username);
-    //     }
-    // }).catch(err => {
-    //     console.error(err);
-    // })
+    // useEffect(() => {
+    //     API.getUserById(user, (err, userData) => {
+    //         setUsername(userData.username);
+    //         setPassword(userData.password);
+    //         setEmail(userData.email);
+    //         setBirthday(userData.birthday);
+    //     });
+    // }, [user])
 
     return <>
         <Form>
@@ -53,39 +50,15 @@ export const ProfileView = ({ url, user, onUpdate, onDeregister, movies }) => {
             </Form.Group>
             <Button style={{margin: "10px"}} onClick={() => {
                 // update user data
-                fetch(url + `/user/${user._id}`, {
-                    method: "PUT",
-                    headers: { "Content-type": "application/json", "Authorization": `Bearer ${user.token}` },
-                    body: JSON.stringify({
-                        "username": username,
-                        "password": password,
-                        "email": email,
-                        "birthday": birthday
-                    })}).then(res => {
-                        return res.json();
-                    }).then(json => {
-                        // onUpdate(err, user)
-                        if (json._id == user._id) {
-                            alert("Update success");
-                        } else {
-                            alert("Update fail");
-                        }
-                    }).catch(err => {
-                        console.error(err);
-                    })
+                API.updateUserData(url, user, {
+                    "username": username,
+                    "password": password,
+                    "email": email,
+                    "birthday": birthday
+                }, onUpdate)
             }}>Update</Button>
             <Button style={{margin: "10px"}} onClick={() => {
-                // deregister
-                fetch(url + `/user`, {method: "DELETE",
-                headers: {"Authorization": `Bearer ${user.token}`, "Content-type": "application/json"},
-                body: JSON.stringify({"id": user._id})}).then(res => {
-                        return res.text();
-                    }).then(text => {
-                        // onDeregister(err, user)
-                        alert(text);
-                    }).catch(err => {
-                        console.error(err);
-                    })
+                API.deregister(user, onDeregister);
             }}>Deregister</Button>
         </Form>
         <h2>Favorite Movies</h2>
