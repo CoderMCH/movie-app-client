@@ -11,6 +11,19 @@ export const MainView = () => {
     // user: { username: "", token: "" }
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const [user, setUser] = useState(storedUser && "username" in storedUser ? storedUser : null);
+
+    const [movies, setMovies] = useState([]);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    useEffect(() => {
+        fetch(appUrl + "/movies", {method: "GET", headers: { 'Authorization': `Bearer ${user?.token}` }})
+            .then((response) => response.json())
+            .then((data) => {
+                setMovies(data);
+            }).catch(err => {
+                console.error(err);
+            })
+    }, [user?.token])
+
     if (!user) {
         return <Row className="justify-content-md-center">
             <Col md={5}>
@@ -39,18 +52,6 @@ export const MainView = () => {
             localStorage.clear();
             setUser(null);
     }}>Logout</Button>
-
-    const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
-    useEffect(() => {
-        fetch(appUrl + "/movies", {method: "GET", headers: { 'Authorization': `Bearer ${user.token}` }})
-            .then((response) => response.json())
-            .then((data) => {
-                setMovies(data);
-            }).catch(err => {
-                console.error(err);
-            })
-    }, [user.token])
 
     if (selectedMovie) {
         return <>
