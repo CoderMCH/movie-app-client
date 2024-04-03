@@ -1,58 +1,95 @@
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movieCard/movieCard";
 import { MovieView } from "../movieView/movieView";
+import { LoginView } from "../loginView/loginView";
+import { RegisterView } from "../registerView/registerView";
+import { Row, Col } from "react-bootstrap";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { NavBar } from "../navBar/navBar";
+import { ProfileView } from "../profileView/profileView";
+import { API } from "../../functions/api";
 
 export const MainView = () => {
+    // user: { username: "", password: "", email: "", birthday: "", token: "", _id: "" }
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const [user, setUser] = useState(storedUser && "username" in storedUser ? storedUser : null);
     const [movies, setMovies] = useState([]);
-
-    const [selectedMovie, setSelectedMovie] = useState(null);
     useEffect(() => {
-        let url = "https://mch-flix-app-813b2fce5e48.herokuapp.com/movies";
-        // temp token for bypass server auth
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmMjg4NzgxNGQzYTQzM2RiMDE4ODciLCJ1c2VybmFtZSI6Imhlcm9rdVRlc3QiLCJwYXNzd29yZCI6IiQyYiQxMCRDTzg5cWFoY2p2MWcydUVwajFoOC9PN2JPZkVIVkFvNmxYdnR5NFdxZGN2V3JhNFBEMzJTbSIsImVtYWlsIjoidGVzdEBoZXJva3UuY29tIiwiZmF2b3JpdGVNb3ZpZXMiOlsiNjVlYTdmYzA1Yzg2ZGE5NTI1OGZlZTIxIiwiNjVlYTdmYzA1Yzg2ZGE5NTI1OGZlZTIxIiwiNjVlYTdmZTU1Yzg2ZGE5NTI1OGZlZTI1IiwiNjVlYTdmZWQ1Yzg2ZGE5NTI1OGZlZTI2Il0sIl9fdiI6MCwiaWF0IjoxNzEwMjkzMzY4LCJleHAiOjE3MTA4OTgxNjgsInN1YiI6Imhlcm9rdVRlc3QifQ.ymxaWZn5UPPoiXnW3LSu5pCm6rX5SLPZAMlrQ-6g9zY";
-        fetch(url, {method: "GET", headers: { 'Authorization': `Bearer ${token}` }})
-            .then((response) => response.json())
-            .then((data) => {
-                setMovies(data);
-            }).catch(err => {
-                console.error(err);
-            })
-    }, [])
+        API.getMoviesList(user, (data) => {setMovies(data)});
+    }, [user])
 
-    if (selectedMovie) {
-        return <>
-            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-            <hr />
-            <h2>Similar movies</h2>
-            <div style={ {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"} }>
-                {
-                    movies.filter(movie => movie.title != selectedMovie.title && movie.genre.type == selectedMovie.genre.type).map(movie => {
-                        return <MovieCard key={ movie._id } movie={ movie }
-                                onMovieClick={() => {
-                                    setSelectedMovie(movie);
-                                }} />
-                    })
-                }
-            </div>
-        </>
-    }
-
-    if (movies.length === 0) {
-        return <div>The list is empty!</div>;
-    }
-    
-    let nthMovie = 0;
     return (
-        <div style={ {display: "grid", gridTemplateColumns: "1fr 1fr 1fr"} }>
-            {
-                movies.map((movie) => {
-                    nthMovie++;
-                    return <MovieCard key={ movie._id } nthMovie={ nthMovie } movie={ movie }
-                            onMovieClick={() => {
-                                setSelectedMovie(movie);
-                            }} />
-                })}
-        </div>
-    );
+        <BrowserRouter>
+            <NavBar onLoggedOut={() => {
+                setUser(null);
+                localStorage.removeItem("user");
+            }}></NavBar>
+            <Row className="justify-content-md-center">
+                <Routes>
+                    <Route path="/" element={ <>HomePage</> } />
+                    <Route path="/login" element={
+                        user ? <Navigate to="/" /> :
+                        <Col md={5}>
+                            <LoginView onLoggedIn={(err, user) => {
+                                if (err) {
+                                    alert(`Login fail\nError: ${err}`);
+                                } else {
+                                    alert(`Login success\nUsername: ${user.username}`)
+                                    setUser(user);
+                                }
+                            }}/>
+                            <br />
+                            <div>Don't have an account? <Link to="/signup">Signup</Link></div>
+                        </Col>
+                    } />
+                    <Route path="/signup" element={
+                        user ? <Navigate to="/" /> :
+                        <Col md={5}>
+                            <RegisterView onRegister={(err, username) => {
+                                if (err) {
+                                    alert(`Register fail\nError: ${err}`);
+                                } else {
+                                    alert(`Register success\nUsername: ${username}`);
+                                }
+                            }}/>
+                        </Col>
+                    } />
+                    <Route path="/movies" element={
+                        !user ? <Navigate to={"/login"} /> :
+                        (movies.length === 0) ? <>The list is empty</> :
+                            <Row>{movies.map((movie) => {
+                                return <Col md={3} key={ movie._id }>
+                                    <Link to={`/movie/${movie._id}`}>
+                                        <MovieCard movie={ movie } />
+                                    </Link>
+                                </Col>
+                            })}</Row>
+                    } />
+                    <Route path="/movie/:id" element={
+                        !user ? <Navigate to={"/"} /> : <MovieView className="h-100" user={user} movies={movies} />
+                    } />
+                    <Route path="/user" element={
+                        !user ? <Navigate to={"/login"} /> :
+                        <ProfileView user={user} movies={movies}
+                        onUpdate={(mesg, newUser) => {
+                            if (mesg) {
+                                alert(`Update fail\nError: ${mesg}`)
+                            } else {
+                                newUser.token = user.token;
+                                setUser(newUser);
+                                localStorage.setItem("user", JSON.stringify(user));
+                                alert("Update Success");
+                            }
+                        }}
+                        onDeregister={(mesg) => {
+                            alert(mesg);
+                            setUser(null);
+                            localStorage.removeItem("user");
+                        }} />
+                    } />
+                </Routes>
+            </Row>
+        </BrowserRouter>
+    )
     
 };
