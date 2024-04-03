@@ -20,7 +20,10 @@ export const MainView = () => {
 
     return (
         <BrowserRouter>
-            <NavBar></NavBar>
+            <NavBar onLoggedOut={() => {
+                setUser(null);
+                localStorage.removeItem("user");
+            }}></NavBar>
             <Row className="justify-content-md-center">
                 <Routes>
                     <Route path="/" element={ <>HomePage</> } />
@@ -35,6 +38,8 @@ export const MainView = () => {
                                     setUser(user);
                                 }
                             }}/>
+                            <br />
+                            <div>Don't have an account? <Link to="/signup">Signup</Link></div>
                         </Col>
                     } />
                     <Route path="/signup" element={

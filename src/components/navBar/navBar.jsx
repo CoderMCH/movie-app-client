@@ -1,6 +1,9 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
-export const NavBar = () => {
+export const NavBar = ({onLoggedOut}) => {
+    const logoutBtn = <Button
+    onClick={ev => onLoggedOut()} >Logout</Button>
+
     return <Navbar bg="light" expand="lg">
         <Container>
             <Navbar.Brand href="/">Movie app</Navbar.Brand>
@@ -11,6 +14,7 @@ export const NavBar = () => {
                 <Nav.Link href="/movies">Movies</Nav.Link>
             </Nav>
             </Navbar.Collapse>
+            {logoutBtn}
         </Container>
     </Navbar>
 }

@@ -14,21 +14,24 @@ export const API = {
             })
     },
 
-    // not tested
     login: (loginData, onLoggedIn) => {
-        fetch(url + "/user", { method: "POST",
+        fetch(url + "/login", { method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(loginData)
-        }).then(res => {
-            res.json().then(json => {
-                if (json.message) {
-                    onLoggedIn(json.message, null);
-                } else {
-                    onLoggedIn(null, json);
-                }
-            })
+        }).then(res => res.json())
+        .then(json => {
+            if (json.message) throw new Error(json.message);
+            
+            let data = {
+                ...json.user,
+                "password": loginData.password,
+                "token": json.token
+            };
+            localStorage.setItem("user", JSON.stringify(data));
+            onLoggedIn(null, data);
         }).catch(err => {
             console.error(err);
+            onLoggedIn(err, null);
         })
     },
 
@@ -48,16 +51,15 @@ export const API = {
         })
     },
 
-    getUserById: (user) => {
+    getUserById: (user, onGotUser) => {
         if (!user) return;
         fetch(url + `/user/${user._id}`, {method: "GET", headers: {'Authorization': `Bearer ${user.token}`}}).then(res => {
             return res.json();
         }).then(json => {
-            console.log(json);
             if (json.message) {
-                alert(json.message);
+                onGotUser(json, null);
             } else {
-                alert(json.username);
+                onGotUser(null, json);
             }
         }).catch(err => {
             console.error(err);
@@ -98,16 +100,22 @@ export const API = {
     },
 
     addMovieToFavorite: (user, movie, onAdded) => {
-        fetch(url + `/user/${user._id}/${movie.title}`, {method: "POST", headers: {"Authorization": `Bearer ${user.token}`}}).then(res => {
-            onAdded();
+        fetch(url + `/user/${user._id}/${movie.title}`, {method: "POST", headers: {"Authorization": `Bearer ${user.token}`}})
+        .then(res => {
+            res.json().then(json => {
+                onAdded(json.favoriteMovies);
+            })
         }).catch(err => {
             console.error(err)
         })
     },
 
-    removeMovieToFavorite: (user, movie, onRemove) => {
-        fetch(url + `/user/${user._id}/${movie.title}`, {method: "DELETE", headers: {"Authorization": `Bearer ${user.token}`}}).then(res => {
-            onRemove();
+    removeMovieToFavorite: (user, movie, onRemoved) => {
+        fetch(url + `/user/${user._id}/${movie.title}`, {method: "DELETE", headers: {"Authorization": `Bearer ${user.token}`}})
+        .then(res => {
+            res.json().then(json => {
+                onRemoved(json.favoriteMovies);
+            })
         }).catch(err => {
             console.error(err)
         })

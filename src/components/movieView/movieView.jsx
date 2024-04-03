@@ -12,6 +12,11 @@ export const MovieView = ({ user, movies }) => {
     let [isFavorite, setIsFavorite] = useState(selectedMovie && user.favoriteMovies.find(favorite => selectedMovie._id == favorite));
     let [btnMesg, setBtnMesg] = useState(isFavorite ? "Remove from Favorite" : "Add to Favorite");
     useEffect(() => {
+        let bool = selectedMovie && user.favoriteMovies.find(favorite => selectedMovie._id == favorite);
+        setIsFavorite(bool);
+        setBtnMesg(bool ? "Remove from Favorite" : "Add to Favorite");
+    }, [selectedMovie])
+    useEffect(() => {
         setBtnMesg(isFavorite ? "Remove from Favorite" : "Add to Favorite");
     }, [isFavorite])
 
@@ -21,8 +26,17 @@ export const MovieView = ({ user, movies }) => {
         <Row className="movieView" style={{position: "relative"}}>
             <Button style={{width: "auto", position: "absolute", top:"10px", right:"10px"}}
                 onClick={ev => {
-                    isFavorite ? API.removeMovieToFavorite(user, selectedMovie, () => {}) :
-                        API.addMovieToFavorite(user, selectedMovie, () => {});
+                    if (isFavorite) {
+                        API.removeMovieToFavorite(user, selectedMovie, (favoriteMovies) => {
+                            user.favoriteMovies = favoriteMovies;
+                            localStorage.setItem("user", JSON.stringify(user));
+                        })
+                    } else {
+                        API.addMovieToFavorite(user, selectedMovie, (favoriteMovies) => {
+                            user.favoriteMovies = favoriteMovies;
+                            localStorage.setItem("user", JSON.stringify(user));
+                        });
+                    }
                     setIsFavorite(!isFavorite);
                 }}>{btnMesg}</Button>
             <Col md={3}>
