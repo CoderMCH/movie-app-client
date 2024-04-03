@@ -18,6 +18,16 @@ div.movieView > div {
   margin-bottom: 10px;
 }
 
+li.passwordValidation.invalid {
+  color: red;
+  list-style-type: "⤫";
+}
+
+li.passwordValidation.valid {
+  color: green;
+  list-style-type: "✓";
+}
+
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

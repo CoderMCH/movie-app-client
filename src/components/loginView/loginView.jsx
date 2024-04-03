@@ -21,7 +21,7 @@ export const LoginView = ({onLoggedIn}) => {
                 <Form.Label>Password:</Form.Label>
                 <Form.Control type="password" value={password} onChange={ev => setPassword(ev.target.value)} required/>
             </Form.Group>
-            <Button variant="light" type="submit">Login</Button>
+            <Button variant="dark" type="submit" style={{marginTop: "5px"}}>Login</Button>
         </Form>
     );
 };

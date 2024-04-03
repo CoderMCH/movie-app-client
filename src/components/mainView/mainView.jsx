@@ -4,7 +4,7 @@ import { MovieView } from "../movieView/movieView";
 import { LoginView } from "../loginView/loginView";
 import { RegisterView } from "../registerView/registerView";
 import { Row, Col } from "react-bootstrap";
-import { BrowserRouter, Link, Navigate, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { NavBar } from "../navBar/navBar";
 import { ProfileView } from "../profileView/profileView";
 import { API } from "../../functions/api";
@@ -84,6 +84,7 @@ export const MainView = () => {
                         onDeregister={(mesg) => {
                             alert(mesg);
                             setUser(null);
+                            localStorage.removeItem("user");
                         }} />
                     } />
                 </Routes>

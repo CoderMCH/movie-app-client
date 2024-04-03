@@ -27412,6 +27412,7 @@ const MainView = ()=>{
                                 onDeregister: (mesg)=>{
                                     alert(mesg);
                                     setUser(null);
+                                    localStorage.removeItem("user");
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/mainView/mainView.jsx",
@@ -41767,8 +41768,11 @@ const LoginView = ({ onLoggedIn })=>{
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
-                variant: "light",
+                variant: "dark",
                 type: "submit",
+                style: {
+                    marginTop: "5px"
+                },
                 children: "Login"
             }, void 0, false, {
                 fileName: "src/components/loginView/loginView.jsx",
@@ -41806,6 +41810,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactBootstrap = require("react-bootstrap");
 var _api = require("../../functions/api");
+var _passwordValidationScss = require("../passwordValidation.scss");
 var _s = $RefreshSig$();
 const RegisterView = ({ onRegister })=>{
     _s();
@@ -41813,8 +41818,13 @@ const RegisterView = ({ onRegister })=>{
     const [password, setPassword] = (0, _react.useState)("");
     const [email, setEmail] = (0, _react.useState)("");
     const [birthday, setBirthday] = (0, _react.useState)("");
+    const [isValidPwd, setIsValidPwd] = (0, _react.useState)(false);
     const onHandleEvent = ()=>{
         event.preventDefault();
+        if (!isValidPwd) {
+            alert("pwd invalid");
+            return;
+        }
         const registerData = {
             "username": username,
             "password": password,
@@ -41833,72 +41843,13 @@ const RegisterView = ({ onRegister })=>{
                         children: "Username:"
                     }, void 0, false, {
                         fileName: "src/components/registerView/registerView.jsx",
-                        lineNumber: 26,
+                        lineNumber: 35,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                         type: "text",
                         value: username,
                         onChange: (ev)=>setUsername(ev.target.value),
-                        required: true
-                    }, void 0, false, {
-                        fileName: "src/components/registerView/registerView.jsx",
-                        lineNumber: 27,
-                        columnNumber: 17
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/registerView/registerView.jsx",
-                lineNumber: 25,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                controlId: "registerFormPassword",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                        children: "Password:"
-                    }, void 0, false, {
-                        fileName: "src/components/registerView/registerView.jsx",
-                        lineNumber: 30,
-                        columnNumber: 17
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                        type: "password",
-                        value: password,
-                        onChange: (ev)=>setPassword(ev.target.value),
-                        required: true
-                    }, void 0, false, {
-                        fileName: "src/components/registerView/registerView.jsx",
-                        lineNumber: 31,
-                        columnNumber: 17
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Text, {
-                        children: "Your password must contain at least 8 characters, including special character, number, lower and uppercase letter"
-                    }, void 0, false, {
-                        fileName: "src/components/registerView/registerView.jsx",
-                        lineNumber: 32,
-                        columnNumber: 17
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/registerView/registerView.jsx",
-                lineNumber: 29,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                controlId: "registerFormEmail",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                        children: "Email:"
-                    }, void 0, false, {
-                        fileName: "src/components/registerView/registerView.jsx",
-                        lineNumber: 35,
-                        columnNumber: 17
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                        type: "email",
-                        value: email,
-                        onChange: (ev)=>setEmail(ev.target.value),
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/registerView/registerView.jsx",
@@ -41912,22 +41863,122 @@ const RegisterView = ({ onRegister })=>{
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
-                controlId: "registerFormBirthday",
+                controlId: "registerFormPassword",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
-                        children: "Birthday:"
+                        children: "Password:"
                     }, void 0, false, {
                         fileName: "src/components/registerView/registerView.jsx",
                         lineNumber: 39,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
-                        type: "date",
-                        value: birthday,
-                        onChange: (ev)=>setBirthday(ev.target.value)
+                        type: "password",
+                        value: password,
+                        onChange: (ev)=>{
+                            const pwdCtrl = ev.target;
+                            setPassword(pwdCtrl.value);
+                            let ctrlPair = [
+                                [
+                                    document.querySelector("#hasLength"),
+                                    pwdCtrl.value.length > 7
+                                ],
+                                [
+                                    document.querySelector("#hasSym"),
+                                    pwdCtrl.value.match(/[`~!@#$%^&*()\-+=_,./<>?;':"\[\]\\{}|]/)
+                                ],
+                                [
+                                    document.querySelector("#hasNum"),
+                                    pwdCtrl.value.match(/[0-9]/)
+                                ],
+                                [
+                                    document.querySelector("#hasUpper"),
+                                    pwdCtrl.value.match(/[A-Z]/)
+                                ],
+                                [
+                                    document.querySelector("#hasLower"),
+                                    pwdCtrl.value.match(/[a-z]/)
+                                ]
+                            ];
+                            setIsValidPwd(true);
+                            ctrlPair.forEach((pair)=>{
+                                if (pair[1]) {
+                                    pair[0].classList.remove("invalid");
+                                    pair[0].classList.add("valid");
+                                } else {
+                                    pair[0].classList.remove("valid");
+                                    pair[0].classList.add("invalid");
+                                    setIsValidPwd(false);
+                                }
+                            });
+                        },
+                        required: true
                     }, void 0, false, {
                         fileName: "src/components/registerView/registerView.jsx",
                         lineNumber: 40,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Text, {
+                        children: [
+                            "Your password must contain at least 8 characters, including special character, number, lower and uppercase letter",
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                                id: "registerPasswordValidation",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                        className: "passwordValidation invalid",
+                                        id: "hasLength",
+                                        children: "8 characters"
+                                    }, void 0, false, {
+                                        fileName: "src/components/registerView/registerView.jsx",
+                                        lineNumber: 65,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                        className: "passwordValidation invalid",
+                                        id: "hasSym",
+                                        children: "special character"
+                                    }, void 0, false, {
+                                        fileName: "src/components/registerView/registerView.jsx",
+                                        lineNumber: 66,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                        className: "passwordValidation invalid",
+                                        id: "hasNum",
+                                        children: "number"
+                                    }, void 0, false, {
+                                        fileName: "src/components/registerView/registerView.jsx",
+                                        lineNumber: 67,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                        className: "passwordValidation invalid",
+                                        id: "hasUpper",
+                                        children: "upper case"
+                                    }, void 0, false, {
+                                        fileName: "src/components/registerView/registerView.jsx",
+                                        lineNumber: 68,
+                                        columnNumber: 25
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                        className: "passwordValidation invalid",
+                                        id: "hasLower",
+                                        children: "lower case"
+                                    }, void 0, false, {
+                                        fileName: "src/components/registerView/registerView.jsx",
+                                        lineNumber: 69,
+                                        columnNumber: 25
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/registerView/registerView.jsx",
+                                lineNumber: 64,
+                                columnNumber: 21
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/registerView/registerView.jsx",
+                        lineNumber: 62,
                         columnNumber: 17
                     }, undefined)
                 ]
@@ -41936,23 +41987,74 @@ const RegisterView = ({ onRegister })=>{
                 lineNumber: 38,
                 columnNumber: 13
             }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                controlId: "registerFormEmail",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                        children: "Email:"
+                    }, void 0, false, {
+                        fileName: "src/components/registerView/registerView.jsx",
+                        lineNumber: 74,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                        type: "email",
+                        value: email,
+                        onChange: (ev)=>setEmail(ev.target.value),
+                        required: true
+                    }, void 0, false, {
+                        fileName: "src/components/registerView/registerView.jsx",
+                        lineNumber: 75,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/registerView/registerView.jsx",
+                lineNumber: 73,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
+                controlId: "registerFormBirthday",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Label, {
+                        children: "Birthday:"
+                    }, void 0, false, {
+                        fileName: "src/components/registerView/registerView.jsx",
+                        lineNumber: 78,
+                        columnNumber: 17
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
+                        type: "date",
+                        value: birthday,
+                        onChange: (ev)=>setBirthday(ev.target.value)
+                    }, void 0, false, {
+                        fileName: "src/components/registerView/registerView.jsx",
+                        lineNumber: 79,
+                        columnNumber: 17
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/registerView/registerView.jsx",
+                lineNumber: 77,
+                columnNumber: 13
+            }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                 variant: "dark",
                 type: "submit",
                 children: "Register"
             }, void 0, false, {
                 fileName: "src/components/registerView/registerView.jsx",
-                lineNumber: 42,
+                lineNumber: 81,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/registerView/registerView.jsx",
-        lineNumber: 24,
+        lineNumber: 33,
         columnNumber: 9
     }, undefined);
 };
-_s(RegisterView, "jsOQN3GC2XlBG9ITlzCdpyJOnso=");
+_s(RegisterView, "wMNd09is5sNXE+F6mGtpQf9qz8c=");
 _c = RegisterView;
 var _c;
 $RefreshReg$(_c, "RegisterView");
@@ -41962,7 +42064,7 @@ $RefreshReg$(_c, "RegisterView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","../../functions/api":"kse1A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4UrUZ":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","../../functions/api":"kse1A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../passwordValidation.scss":"cGKCj"}],"cGKCj":[function() {},{}],"4UrUZ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$ab17 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42073,14 +42175,16 @@ var _reactBootstrap = require("react-bootstrap");
 var _movieCard = require("../movieCard/movieCard");
 var _api = require("../../functions/api");
 var _reactRouterDom = require("react-router-dom");
+var _passwordValidationScss = require("../passwordValidation.scss");
 var _s = $RefreshSig$();
 const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
     _s();
-    let [username, setUsername] = (0, _react.useState)(user.username);
-    let [password, setPassword] = (0, _react.useState)(user.password);
-    let [email, setEmail] = (0, _react.useState)(user.email);
-    let dateStr = new Date(user.birthday).toISOString().split("T")[0];
-    let [birthday, setBirthday] = (0, _react.useState)(dateStr);
+    const [username, setUsername] = (0, _react.useState)(user.username);
+    const [password, setPassword] = (0, _react.useState)(user.password);
+    const [email, setEmail] = (0, _react.useState)(user.email);
+    let dateStr = user.birthday ? new Date(user.birthday).toISOString().split("T")[0] : "";
+    const [birthday, setBirthday] = (0, _react.useState)(dateStr);
+    const [isValidPwd, setIsValidPwd] = (0, _react.useState)(true);
     (0, _react.useEffect)(()=>{
         (0, _api.API).getUserById(user, (err, userData)=>{
             if (err) {
@@ -42090,7 +42194,7 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
             setUsername(userData.username);
             setPassword(password);
             setEmail(userData.email);
-            let updatedDateStr = new Date(userData.birthday).toISOString().split("T")[0];
+            let updatedDateStr = userData.birthday ? new Date(userData.birthday).toISOString().split("T")[0] : "";
             setBirthday(updatedDateStr);
         });
     }, [
@@ -42107,7 +42211,7 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 children: "Username:"
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 31,
+                                lineNumber: 35,
                                 columnNumber: 17
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -42118,13 +42222,13 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 32,
+                                lineNumber: 36,
                                 columnNumber: 17
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 30,
+                        lineNumber: 34,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -42134,31 +42238,122 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 children: "Password:"
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 37,
+                                lineNumber: 41,
                                 columnNumber: 17
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
                                 type: "password",
                                 value: password,
                                 onChange: (ev)=>{
-                                    setPassword(ev.target.value);
-                                }
+                                    const pwdCtrl = ev.target;
+                                    setPassword(pwdCtrl.value);
+                                    let ctrlPair = [
+                                        [
+                                            document.querySelector("#hasLength"),
+                                            pwdCtrl.value.length > 7
+                                        ],
+                                        [
+                                            document.querySelector("#hasSym"),
+                                            pwdCtrl.value.match(/[`~!@#$%^&*()\-+=_,./<>?;':"\[\]\\{}|]/)
+                                        ],
+                                        [
+                                            document.querySelector("#hasNum"),
+                                            pwdCtrl.value.match(/[0-9]/)
+                                        ],
+                                        [
+                                            document.querySelector("#hasUpper"),
+                                            pwdCtrl.value.match(/[A-Z]/)
+                                        ],
+                                        [
+                                            document.querySelector("#hasLower"),
+                                            pwdCtrl.value.match(/[a-z]/)
+                                        ]
+                                    ];
+                                    setIsValidPwd(true);
+                                    ctrlPair.forEach((pair)=>{
+                                        if (pair[1]) {
+                                            pair[0].classList.remove("invalid");
+                                            pair[0].classList.add("valid");
+                                        } else {
+                                            pair[0].classList.remove("valid");
+                                            pair[0].classList.add("invalid");
+                                            setIsValidPwd(false);
+                                        }
+                                    });
+                                },
+                                required: true
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 38,
+                                lineNumber: 42,
                                 columnNumber: 17
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Text, {
-                                children: "Your password must contain at least 8 characters, including special character, number, lower and uppercase letter"
-                            }, void 0, false, {
+                                children: [
+                                    "Your password must contain at least 8 characters, including special character, number, lower and uppercase letter",
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                                        id: "registerPasswordValidation",
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                className: "passwordValidation valid",
+                                                id: "hasLength",
+                                                children: "8 characters"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profileView/profileView.jsx",
+                                                lineNumber: 67,
+                                                columnNumber: 25
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                className: "passwordValidation valid",
+                                                id: "hasSym",
+                                                children: "special character"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profileView/profileView.jsx",
+                                                lineNumber: 68,
+                                                columnNumber: 25
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                className: "passwordValidation valid",
+                                                id: "hasNum",
+                                                children: "number"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profileView/profileView.jsx",
+                                                lineNumber: 69,
+                                                columnNumber: 25
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                className: "passwordValidation valid",
+                                                id: "hasUpper",
+                                                children: "upper case"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profileView/profileView.jsx",
+                                                lineNumber: 70,
+                                                columnNumber: 25
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                                className: "passwordValidation valid",
+                                                id: "hasLower",
+                                                children: "lower case"
+                                            }, void 0, false, {
+                                                fileName: "src/components/profileView/profileView.jsx",
+                                                lineNumber: 71,
+                                                columnNumber: 25
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/components/profileView/profileView.jsx",
+                                        lineNumber: 66,
+                                        columnNumber: 21
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 41,
+                                lineNumber: 64,
                                 columnNumber: 17
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 36,
+                        lineNumber: 40,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -42168,7 +42363,7 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 children: "Email:"
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 44,
+                                lineNumber: 76,
                                 columnNumber: 17
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -42179,13 +42374,13 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 45,
+                                lineNumber: 77,
                                 columnNumber: 17
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 43,
+                        lineNumber: 75,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Group, {
@@ -42195,7 +42390,7 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 children: "Birthday:"
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 50,
+                                lineNumber: 82,
                                 columnNumber: 17
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form).Control, {
@@ -42206,13 +42401,13 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 51,
+                                lineNumber: 83,
                                 columnNumber: 17
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 49,
+                        lineNumber: 81,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -42220,6 +42415,10 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                             margin: "10px"
                         },
                         onClick: ()=>{
+                            if (!isValidPwd) {
+                                alert("invalid password");
+                                return;
+                            }
                             // update user data
                             (0, _api.API).updateUserData(user, {
                                 "username": username,
@@ -42231,7 +42430,7 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                         children: "Update"
                     }, void 0, false, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 56,
+                        lineNumber: 88,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -42244,20 +42443,20 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                         children: "Deregister"
                     }, void 0, false, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 65,
+                        lineNumber: 101,
                         columnNumber: 13
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/profileView/profileView.jsx",
-                lineNumber: 29,
+                lineNumber: 33,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 children: "Favorite Movies"
             }, void 0, false, {
                 fileName: "src/components/profileView/profileView.jsx",
-                lineNumber: 69,
+                lineNumber: 105,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -42271,29 +42470,29 @@ const ProfileView = ({ user, onUpdate, onDeregister, movies })=>{
                                 movie: thisMovie
                             }, void 0, false, {
                                 fileName: "src/components/profileView/profileView.jsx",
-                                lineNumber: 75,
+                                lineNumber: 111,
                                 columnNumber: 29
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/profileView/profileView.jsx",
-                            lineNumber: 74,
+                            lineNumber: 110,
                             columnNumber: 25
                         }, undefined)
                     }, thisMovie._id, false, {
                         fileName: "src/components/profileView/profileView.jsx",
-                        lineNumber: 73,
+                        lineNumber: 109,
                         columnNumber: 28
                     }, undefined);
                 })
             }, void 0, false, {
                 fileName: "src/components/profileView/profileView.jsx",
-                lineNumber: 70,
+                lineNumber: 106,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true);
 };
-_s(ProfileView, "p4TlUI8u72719ccWcOSXnZRMXHI=");
+_s(ProfileView, "fcy8L0kuYGPZnB18YoYu0dXzxPo=");
 _c = ProfileView;
 var _c;
 $RefreshReg$(_c, "ProfileView");
@@ -42303,6 +42502,6 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","../movieCard/movieCard":"gGoIK","../../functions/api":"kse1A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-router-dom":"9xmpe"}],"lJZlQ":[function() {},{}]},["gjUm6","1xC6H","d8Dch"], "d8Dch", "parcelRequire6ce0")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","../movieCard/movieCard":"gGoIK","../../functions/api":"kse1A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../passwordValidation.scss":"cGKCj"}],"cGKCj":[function() {},{}],"lJZlQ":[function() {},{}]},["gjUm6","1xC6H","d8Dch"], "d8Dch", "parcelRequire6ce0")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
