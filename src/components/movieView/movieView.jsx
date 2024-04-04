@@ -40,7 +40,6 @@ export const MovieView = ({ user, movies }) => {
                     setIsFavorite(!isFavorite);
                 }}>{btnMesg}</Button>
             <Col md={3}>
-                {/* why w-100 solve text overflow problem */}
                 <img className="w-100" src={selectedMovie.imagePath} alt="" />
             </Col>
             <Col md={9}>
