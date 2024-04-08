@@ -1,4 +1,6 @@
 # movie-app-client (everything in process
+![image](https://github.com/CoderMCH/movie-app-client/assets/160289936/404cf362-128a-4ef6-bd5e-75fbdbb5ea2c)
+
 ## Main view
 ● Returns ALL movies to the user (each movie item with an image, title, and description)
 
